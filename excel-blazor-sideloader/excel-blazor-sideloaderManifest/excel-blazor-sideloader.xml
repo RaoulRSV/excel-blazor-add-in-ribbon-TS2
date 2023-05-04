@@ -1,0 +1,215 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<OfficeApp xmlns="http://schemas.microsoft.com/office/appforoffice/1.1"
+		   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0"
+           xsi:type="TaskPaneApp">	
+	<Id>6F6ECD00-766E-4BBE-87E2-D69B71F211B9</Id>
+	<Version>1.0.0.0</Version>
+
+	<!--<ProviderName>[Provider name]</ProviderName>-->
+	<ProviderName>[interSyntax]</ProviderName>
+	<DefaultLocale>fr-FR</DefaultLocale>	
+	<DisplayName DefaultValue="No$"/>
+		<!--<Override Locale="fr-FR" Value="No$" />
+	</DisplayName>-->
+	<Description DefaultValue="No$ description."/>	
+	<IconUrl DefaultValue="~remoteAppUrl/Images/No$32.png" />
+	<HighResolutionIconUrl DefaultValue="~remoteAppUrl/Images/No$64.png" />
+	<SupportUrl DefaultValue="https://interSyntax.net" />
+	<Hosts>
+		<Host Name="Workbook" />		
+	</Hosts>
+	<Requirements>	
+		<Sets DefaultMinVersion="1.1">
+			<Set Name="SharedRuntime" MinVersion="1.1"/>
+			<Set Name="ExcelApi" MinVersion="1.3"/>
+			<Set Name="DialogApi" MinVersion="1.1"/>
+			<Set Name ="AddinCommands" MinVersion ="1.1"/>
+			<Set Name="CustomFunctionsRuntime" MinVersion="1.1"/>
+		</Sets>
+	</Requirements>	
+	<DefaultSettings>		
+		<SourceLocation DefaultValue="~remoteAppUrl" />
+	</DefaultSettings>
+	<Permissions>ReadWriteDocument</Permissions>
+	<!-- Begin Add-in Commands Mode integration. -->
+	<VersionOverrides xmlns="http://schemas.microsoft.com/office/taskpaneappversionoverrides" xsi:type="VersionOverridesV1_0">
+		<Hosts>			
+			<Host xsi:type="Workbook">
+				<Runtimes>
+					<Runtime resid="Contoso.SharedRuntime.Url" lifetime="long" />					
+				</Runtimes>				
+				<!-- Form factor. Currently only DesktopFormFactor is supported. -->
+				<DesktopFormFactor>
+					<!--"This code enables a customizable message to be displayed when the add-in is loaded successfully upon individual install."-->
+					<GetStarted>
+						<!--Title of the Getting Started callout. resid points to a ShortString resource -->
+						<Title resid="Contoso.GetStarted.Title"/>
+						<!-- Description of the Getting Started callout. resid points to a LongString resource -->
+						<Description resid="Contoso.GetStarted.Description"/>
+						<!-- Point to a url resource which details how the add-in should be used. -->
+						<LearnMoreUrl resid="Contoso.GetStarted.LearnMoreUrl"/>
+					</GetStarted>
+					<FunctionFile resid="Contoso.SharedRuntime.Url"/>					
+					 <!--PrimaryCommandSurface is the main Office Ribbon.-->
+					<ExtensionPoint xsi:type="PrimaryCommandSurface">
+						<CustomTab id="Contoso.Group1Label">
+							<Group id="Accès">							
+								<Label resid="Contoso.Group2Label"/>								
+								<Icon>
+									<bt:Image size="16" resid="Contoso.tpicon_16x16" />
+									<bt:Image size="32" resid="Contoso.tpicon_32x32" />
+									<bt:Image size="80" resid="Contoso.tpicon_80x80" />
+								</Icon>
+																	<!--<Control xsi:type="Button" id="residLabel" >-->
+									<Control xsi:type="Button" id="Ouvrir" >
+									<Label resid="residLabel" />
+									<Supertip>
+										<Title resid="Contoso.TaskpaneButton.Label3"  />
+										<Description resid="Contoso.TaskpaneButton.Lancer"  />
+									</Supertip>
+									<Icon>
+										<bt:Image size="16" resid="Contoso.tpiconD_16x16" />
+										<bt:Image size="32" resid="Contoso.tpiconD_32x32" />
+										<bt:Image size="80" resid="Contoso.tpiconD_80x80" />
+									</Icon>
+									<Action xsi:type="ExecuteFunction">
+										<FunctionName>lancerchaine</FunctionName>
+									</Action>
+									<Enabled>true</Enabled>
+									</Control>
+									<Control xsi:type="Button" id="préinitier">
+								  <Label resid="Contoso.Group5Label" />
+								  <Supertip>                  
+									<Title resid="Contoso.Group5Label" />                    
+									<Description resid="Contoso.TaskpaneButton.Tooltip" />
+								  </Supertip>
+								  <Icon>
+									  <bt:Image size="16" resid="Contoso.tpiconD_16x16" />
+									  <bt:Image size="32" resid="Contoso.tpiconD_32x32" />
+									  <bt:Image size="80" resid="Contoso.tpiconD_80x80" />
+								  </Icon>									 
+									<Action xsi:type="ExecuteFunction">
+										<FunctionName>lancerchaine2</FunctionName>
+									</Action>
+									<Enabled>true</Enabled>
+								</Control>																						
+							</Group>																			
+						    <Label resid="Contoso.Group1Label" />
+						</CustomTab>													
+				   </ExtensionPoint>					
+				</DesktopFormFactor>
+			</Host>
+		</Hosts>
+
+		<!-- You can use resources across hosts and form factors. -->
+		<Resources>
+			<!-- Icons. Required sizes 16,32,80, optional 20, 24, 40, 48, 64. Strongly recommended to provide all sizes for great UX. -->
+			<bt:Images>
+				<bt:Image id="Contoso.tpicon_16x16" DefaultValue="https://appcommandicons.blob.core.windows.net/images/taskpane_16x.png" />
+				<bt:Image id="Contoso.tpicon_32x32" DefaultValue="~remoteAppUrl/Images/iconeiSX.png" />
+				<bt:Image id="Contoso.tpicon_80x80" DefaultValue="https://appcommandicons.blob.core.windows.net/images/taskpane_80x.png" />				
+				<!--dialog-->
+				<bt:Image id="Contoso.tpiconD_16x16" DefaultValue="~remoteAppUrl/Images/ButtonPaneD16x16.png" />
+				<bt:Image id="Contoso.tpiconD_32x32" DefaultValue="~remoteAppUrl/Images/ButtonPaneD32x32.png" />
+				<bt:Image id="Contoso.tpiconD_80x80" DefaultValue="~remoteAppUrl/Images/ButtonPaneD80x80.png" />
+				<bt:Image id="Contoso.funciconD_16x16" DefaultValue="~remoteAppUrl/Images/Button16x16.png" />
+				<bt:Image id="Contoso.funciconD_32x32" DefaultValue="~remoteAppUrl/Images/Button32x32.png" />
+				<bt:Image id="Contoso.funciconD_80x80" DefaultValue="~remoteAppUrl/Images/Button80x80.png" />
+			</bt:Images>
+			<bt:Urls>				
+				 <bt:Url id="Functions.FunctionFile.Url" DefaultValue="~remoteAppUrl/index.html" /> 
+				<bt:Url id="Contoso.GetStarted.LearnMoreUrl" DefaultValue="https://go.microsoft.com/fwlink/?LinkId=276812" />
+				<bt:Url id="Contoso.SharedRuntime.Url" DefaultValue="~remoteAppUrl/index.html" />				
+			</bt:Urls>
+			<!-- ShortStrings max characters==125.Use Web API from an add-in. -->
+			<bt:ShortStrings>				
+				<bt:String id="Functions.Namespace" DefaultValue="IS"/>
+				<bt:String id="Contoso.TaskpaneButton.Label" DefaultValue="Open">
+					<bt:Override Locale="fr-FR" Value="Ouvrir" />
+				</bt:String>
+				<bt:String id="Contoso.TaskpaneButton.Label2" DefaultValue="Actions" />
+				<bt:String id="Contoso.TaskpaneButton.Label3" DefaultValue="Open">
+					<bt:Override Locale="fr-FR" Value="Ouvrir" />
+				</bt:String>
+				<bt:String id="Contoso.TaskpaneButton.Label4" DefaultValue="Suspend">
+					<bt:Override Locale="fr-FR" Value="Suspendre" />
+				</bt:String>
+				<bt:String id="Contoso.TaskpaneButton.Sauver" DefaultValue="Save">
+					<bt:Override Locale="fr-FR" Value="Sauver" />
+				</bt:String>
+				<bt:String id="Contoso.Group1Label" DefaultValue="No$"/>
+				<bt:String id="Contoso.Group2Label" DefaultValue="Access">
+					<bt:Override Locale="fr-FR" Value="Accès" />
+				</bt:String>
+				<bt:String id="Contoso.Group3Label" DefaultValue="Construction">
+					<bt:Override Locale="fr-FR" Value="Build" />
+				</bt:String>
+				<bt:String id="Contoso.Group4Label" DefaultValue="Commands">
+					<bt:Override Locale="fr-FR" Value="Commandes" />
+				</bt:String>
+				<bt:String id="Contoso.Group5Label" DefaultValue="préinitier">
+					<bt:Override Locale="fr-FR" Value="préinitier" />
+				</bt:String>
+				<bt:String id="Contoso.GetStarted.Title" DefaultValue="No$ Application">
+					<bt:Override Locale="fr-FR" Value="Application No$" />
+				</bt:String>
+				<bt:String id="residLabel" DefaultValue="Open">
+					<bt:Override Locale="fr-FR" Value="Ouvrir"/>
+				</bt:String>
+				<bt:String id="residLabel1" DefaultValue="Copy">
+					<bt:Override Locale="fr-FR" Value="Copier"/>
+				</bt:String>
+				<bt:String id="residLabel2" DefaultValue="Paste">
+					<bt:Override Locale="fr-FR" Value="Coller"/>
+				</bt:String>
+				<bt:String id="residLabel3" DefaultValue="No$D" />
+				<bt:String id="residLabel4" DefaultValue="Undo">
+					<bt:Override Locale="fr-FR" Value="Défaire"/>
+				</bt:String>
+				<bt:String id="residLabel5" DefaultValue="Move">
+					<bt:Override Locale="fr-FR" Value="Déplacer"/>
+				</bt:String>
+				<bt:String id="residLabel6" DefaultValue="Reinit">
+					<bt:Override Locale="fr-FR" Value="Réinit"/>
+				</bt:String>
+				<bt:String id="residLabel7" DefaultValue="Save">
+					<bt:Override Locale="fr-FR" Value="Sauver"/>
+				</bt:String>
+				<bt:String id="residLabel8" DefaultValue="Chain">
+					<bt:Override Locale="fr-FR" Value="Chaîner"/>
+				</bt:String>
+				<bt:String id="residLabel9" DefaultValue="Suspend">
+					<bt:Override Locale="fr-FR" Value="Suspendre"/>
+				</bt:String>
+				<bt:String id="residLabel10" DefaultValue="dialog" />
+				<bt:String id="showGallery2" DefaultValue="showGallery2" />
+				<bt:String id="TestMenu" DefaultValue="showGallery5" />
+				<bt:String id="Autre2" DefaultValue="showGallery6" />
+			</bt:ShortStrings>
+			<!-- LongStrings max characters==250. "Click to start the Web API sample add-in"Your sample add-in loaded succesfully. Go to the HOME tab and click the 'Open' button on the 'Web API' group to get started. -->
+			<bt:LongStrings>
+				<bt:String id="Contoso.TaskpaneButton.Tooltip" DefaultValue=" Default"/>
+				<bt:String id="Contoso.TaskpaneButton.Sauver" DefaultValue=" Save building data with Excel sheet">
+					<bt:Override Locale="fr-FR" Value="Non actif. Sauvegarde les données de conception avec le dossier XL"/>
+				</bt:String>
+				<bt:String id="Contoso.TaskpaneButton.Réinit" DefaultValue="Suppress all building datas">
+					<bt:Override Locale="fr-FR" Value="Supprime toutes les données de conception"/>
+				</bt:String>
+				<bt:String id="Contoso.TaskpaneButton.Lancer" DefaultValue="Activates or desactivates No$">
+					<bt:Override Locale="fr-FR" Value="Active ou réactive No$"/>
+				</bt:String>
+				<bt:String id="Contoso.TaskpaneButton.Suspendre" DefaultValue=" Suspend No$ and reverse">
+					<bt:Override Locale="fr-FR" Value="Suspend No$ puis le remet"/>
+				</bt:String>
+				<bt:String id="Contoso.GetStarted.Description" DefaultValue=" Accelerate and fiabilize the model building">
+					<bt:Override Locale="fr-FR" Value="Accélère et fiabilise la construction de modèles"/>
+				</bt:String>
+				<bt:String id ="residToolTip"  DefaultValue="hihi" />
+			</bt:LongStrings>
+		</Resources>
+	</VersionOverrides>
+	<!-- End Add-in Commands Mode integration. -->
+
+</OfficeApp>
+
